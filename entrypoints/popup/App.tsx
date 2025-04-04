@@ -13,6 +13,7 @@ function App() {
     title: "",
     url: "",
   });
+  const [comment, setComment] = useState("");
 
   // ページ情報をサービスワーカーから取得する関数
   const fetchPageInfo = async () => {
@@ -48,6 +49,7 @@ function App() {
         content: {
           title: pageInfo.title,
           url: pageInfo.url,
+          comment: comment,
         },
       });
       console.log("Data saved to microCMS:", response);
@@ -66,6 +68,11 @@ function App() {
     <div>
       <p>Title: {pageInfo.title}</p>
       <p>URL: {pageInfo.url}</p>
+      <textarea
+        placeholder="コメントを入力してください"
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+      />
       <button onClick={saveToMicroCMS}>Save to microCMS</button>
     </div>
   );

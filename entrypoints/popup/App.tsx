@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
+import { createClient } from "microcms-js-sdk";
 import "./App.css";
+
+// microCMSクライアントの初期化
+const client = createClient({
+  serviceDomain: "",
+  apiKey: "",
+});
 
 function App() {
   const [pageInfo, setPageInfo] = useState({
@@ -33,6 +40,24 @@ function App() {
     }
   };
 
+  // microCMSにデータを保存する関数
+  const saveToMicroCMS = async () => {
+    try {
+      const response = await client.create({
+        endpoint: "",
+        content: {
+          title: pageInfo.title,
+          url: pageInfo.url,
+        },
+      });
+      console.log("Data saved to microCMS:", response);
+      alert("データが保存されました！");
+    } catch (error) {
+      console.error("Failed to save data to microCMS:", error);
+      alert("データの保存に失敗しました。");
+    }
+  };
+
   useEffect(() => {
     fetchPageInfo();
   }, []);
@@ -41,6 +66,7 @@ function App() {
     <div>
       <p>Title: {pageInfo.title}</p>
       <p>URL: {pageInfo.url}</p>
+      <button onClick={saveToMicroCMS}>Save to microCMS</button>
     </div>
   );
 }

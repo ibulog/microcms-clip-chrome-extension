@@ -2,6 +2,15 @@ import { useState, useEffect } from "react";
 import { createClient } from "microcms-js-sdk";
 import "./App.css";
 
+import type { MicroCMSListContent } from "microcms-js-sdk";
+
+type Category = {
+  id: string;
+  name: string;
+};
+
+type CategoryResponse = MicroCMSListContent & Category;
+
 // microCMSクライアントの初期化
 const client = createClient({
   serviceDomain: "",
@@ -14,9 +23,11 @@ function App() {
     url: "",
   });
   const [comment, setComment] = useState("");
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
 
   // ページ情報をサービスワーカーから取得する関数
-  const fetchPageInfo = async () => {
+  const getPageInfo = async () => {
     try {
       const response = await new Promise((resolve, reject) => {
         chrome.runtime.sendMessage({ action: "getPageInfo" }, (response) => {
@@ -41,6 +52,24 @@ function App() {
     }
   };
 
+  // カテゴリーをmicroCMSから取得する関数
+  const fetchCategories = async () => {
+    try {
+      const response = await client.getList({
+        endpoint: "categories",
+      });
+      const categories = response.contents.map((category: CategoryResponse) => {
+        return {
+          id: category.id,
+          name: category.name,
+        };
+      });
+      setCategories(categories);
+    } catch (error) {
+      console.error("Failed to fetch categories:", error);
+    }
+  };
+
   // microCMSにデータを保存する関数
   const saveToMicroCMS = async () => {
     try {
@@ -50,6 +79,7 @@ function App() {
           title: pageInfo.title,
           url: pageInfo.url,
           comment: comment,
+          category: selectedCategory,
         },
       });
       console.log("Data saved to microCMS:", response);
@@ -61,13 +91,28 @@ function App() {
   };
 
   useEffect(() => {
-    fetchPageInfo();
+    getPageInfo();
+    fetchCategories();
   }, []);
 
   return (
     <div>
       <p>Title: {pageInfo.title}</p>
       <p>URL: {pageInfo.url}</p>
+      <div>
+        <label>カテゴリー:</label>
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          <option value="">選択してください</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </div>
       <textarea
         placeholder="コメントを入力してください"
         value={comment}

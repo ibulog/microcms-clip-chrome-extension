@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { secrets } from "@/utils/storage";
 import { createClient } from "microcms-js-sdk";
 import "../../styles/App.css";
 
@@ -11,10 +12,12 @@ type Category = {
 
 type CategoryResponse = MicroCMSListContent & Category;
 
+const { serviceDomain, apiKey } = await secrets.getValue();
+
 // microCMSクライアントの初期化
 const client = createClient({
-  serviceDomain: "",
-  apiKey: "",
+  serviceDomain,
+  apiKey,
 });
 
 function App() {

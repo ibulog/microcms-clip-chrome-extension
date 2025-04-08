@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { secrets } from "@/utils/storage";
 import { createClient } from "microcms-js-sdk";
-import "../../styles/App.css";
+import "./App.css";
 
 import type { MicroCMSListContent } from "microcms-js-sdk";
 
@@ -99,12 +99,16 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <p>Title: {pageInfo.title}</p>
-      <p>URL: {pageInfo.url}</p>
-      <div>
-        <label>カテゴリー:</label>
+    <div className="popup-container">
+      <p className="page-info">
+        <span className="page-title">Title: {pageInfo.title}</span>
+        <span className="page-url">URL: {pageInfo.url}</span>
+      </p>
+      <div className="form-group">
+        <label htmlFor="category-select">カテゴリー:</label>
         <select
+          id="category-select"
+          className="category-select"
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
         >
@@ -117,11 +121,16 @@ function App() {
         </select>
       </div>
       <textarea
+        className="comment-box"
         placeholder="コメントを入力してください"
         value={comment}
         onChange={(e) => setComment(e.target.value)}
       />
-      <button onClick={saveToMicroCMS}>Save to microCMS</button>
+      <div className="button-container">
+        <button className="save-button" onClick={saveToMicroCMS}>
+          Save to microCMS
+        </button>
+      </div>
     </div>
   );
 }

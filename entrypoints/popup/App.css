@@ -1,0 +1,34 @@
+#root {
+  max-width: 785px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: left;
+  overflow: hidden;
+}
+
+.popup-container {
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.page-info {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.page-title,
+.page-url {
+  display: block;
+  margin-bottom: 0.5rem;
+  overflow-wrap: break-word;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.button-container {
+  text-align: right;
+}

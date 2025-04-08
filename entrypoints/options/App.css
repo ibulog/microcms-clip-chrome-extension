@@ -1,0 +1,15 @@
+#root {
+  max-width: 785px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 1rem; /* フォーム要素間の余白を追加 */
+  text-align: left; /* ラベルと入力欄を左揃え */
+}
+
+.button-container {
+  text-align: right;
+}

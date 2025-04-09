@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 async function getClips() {
   const clips = await client.getList<Clip>({
-    endpoint: "clip",
+    endpoint: "clips",
   });
   return clips;
 }

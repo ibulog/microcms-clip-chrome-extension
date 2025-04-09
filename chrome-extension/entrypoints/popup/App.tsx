@@ -77,7 +77,7 @@ function App() {
   const saveToMicroCMS = async () => {
     try {
       const response = await client.create({
-        endpoint: "clipboard",
+        endpoint: "clips",
         content: {
           title: pageInfo.title,
           url: pageInfo.url,

@@ -7,4 +7,14 @@ export default defineConfig({
     permissions: ["storage"],
     options_page: "entrypoints/options/index.html",
   },
+  vite: () => ({
+    build: {
+      target: "esnext",
+    },
+    esbuild: {
+      supported: {
+        "top-level-await": true,
+      },
+    },
+  }),
 });

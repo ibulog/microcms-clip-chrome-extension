@@ -2,7 +2,6 @@ export default defineContentScript({
   matches: ["<all_urls>"],
   main() {
     type PageInfo = {
-      action: string;
       title: string;
       url: string;
     };

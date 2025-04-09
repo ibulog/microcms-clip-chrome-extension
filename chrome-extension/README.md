@@ -1,3 +1,3 @@
-# WXT + React
+# microcms-clip-chrome-extension Chrome拡張実装
 
-This template should help get you started developing with React in WXT.
+microCMSからクリップしたウェブサイトの情報を取得して表示する、Chrome拡張機能の実装です。

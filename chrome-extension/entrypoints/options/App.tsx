@@ -30,7 +30,7 @@ function App() {
       <div className="form-group">
         <label htmlFor="apiKey">APIキー</label>
         <input
-          type="text"
+          type="passoword"
           id="apiKey"
           value={apiKey}
           onChange={(e) => setApiKey(e.target.value)}

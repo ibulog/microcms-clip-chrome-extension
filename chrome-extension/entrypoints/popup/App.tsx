@@ -86,10 +86,10 @@ function App() {
         },
       });
       console.log("Data saved to microCMS:", response);
-      alert("データが保存されました！");
+      alert("クリップしました！");
     } catch (error) {
       console.error("Failed to save data to microCMS:", error);
-      alert("データの保存に失敗しました。");
+      alert("クリップに失敗しました。");
     }
   };
 
@@ -101,7 +101,7 @@ function App() {
   return (
     <div className="popup-container">
       <p className="page-info">
-        <span className="page-title">Title: {pageInfo.title}</span>
+        <span className="page-title">タイトル: {pageInfo.title}</span>
         <span className="page-url">URL: {pageInfo.url}</span>
       </p>
       <div className="form-group">
@@ -128,7 +128,7 @@ function App() {
       />
       <div className="button-container">
         <button className="save-button" onClick={saveToMicroCMS}>
-          Save to microCMS
+          クリップ
         </button>
       </div>
     </div>

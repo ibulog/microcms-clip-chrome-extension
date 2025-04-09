@@ -30,7 +30,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
   // ページ情報をサービスワーカーから取得する関数
-  const getPageInfo = async () => {
+  async function getPageInfo() {
     try {
       const response = await new Promise((resolve, reject) => {
         chrome.runtime.sendMessage({ action: "getPageInfo" }, (response) => {
@@ -53,10 +53,10 @@ function App() {
     } catch (error) {
       console.error("Error fetching page info:", error);
     }
-  };
+  }
 
   // カテゴリーをmicroCMSから取得する関数
-  const fetchCategories = async () => {
+  async function fetchCategories() {
     try {
       const response = await client.getList({
         endpoint: "categories",
@@ -71,10 +71,10 @@ function App() {
     } catch (error) {
       console.error("Failed to fetch categories:", error);
     }
-  };
+  }
 
   // microCMSにデータを保存する関数
-  const saveToMicroCMS = async () => {
+  async function saveToMicroCMS() {
     try {
       const response = await client.create({
         endpoint: "clips",
@@ -91,7 +91,7 @@ function App() {
       console.error("Failed to save data to microCMS:", error);
       alert("クリップに失敗しました。");
     }
-  };
+  }
 
   useEffect(() => {
     getPageInfo();

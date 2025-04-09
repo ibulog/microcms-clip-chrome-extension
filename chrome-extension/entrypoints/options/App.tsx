@@ -7,13 +7,13 @@ function App() {
   const [apiKey, setApiKey] = useState("");
 
   // secretsを保存する関数
-  const handleSave = async () => {
+  async function handleSave() {
     await secrets.setValue({
       serviceDomain,
       apiKey,
     });
     alert("設定が保存されました。");
-  };
+  }
 
   return (
     <>
